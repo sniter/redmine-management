@@ -1,0 +1,4 @@
+python-redmine==1.5.0
+pyaml==15.8.2
+kitchen==1.2.4
+termcolor
