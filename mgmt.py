@@ -69,12 +69,29 @@ list_parser.add_argument("--sort",
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-get_parser = subparsers.add_parser('get', help='get tes info help')
+get_parser = subparsers.add_parser('task', help='get tes info help')
 get_parser.set_defaults(func=get_task)
 
 get_parser.add_argument("--id",
                         dest='id', type=int,
                         help="Task Number")
+
+get_parser.add_argument("--done",
+                        dest='progress', type=int,
+                        help="Task Progress Ratio in %")
+
+get_parser.add_argument("--log-time",
+                        dest='log-time', type=float,
+                        help="Log time costs due current task (in hours)")
+
+get_parser.add_argument("--status",
+                        dest='task_status', type=str,
+                        help="Set Task Status")
+
+get_parser.add_argument("--comment",
+                        dest='comment', type=str,
+                        help="Append Comment")
+
 
 
 
