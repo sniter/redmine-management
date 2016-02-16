@@ -5,15 +5,15 @@ __author__ = 'ilya'
 import console
 import textwrap
 from termcolor import colored
-from redmine.resources import Tracker
-from redmine.resources import User
-from redmine.resources import Issue
-from redmine.resources import IssueStatus
-from redmine.resources import IssueJournal
-from redmine.resources import TimeEntry
-from redmine.resultsets import ResourceSet
+# from redmine.resources import Tracker
+# from redmine.resources import User
+# from redmine.resources import Issue
+# from redmine.resources import IssueStatus
+# from redmine.resources import IssueJournal
+# from redmine.resources import TimeEntry
+# from redmine.resultsets import ResourceSet
 
-_classes = [Tracker, User, Issue, IssueStatus, IssueJournal, TimeEntry]
+# _classes = [Tracker, User, Issue, IssueStatus, IssueJournal, TimeEntry]
 
 
 def _res_to_dict(record, fields=None):
@@ -24,13 +24,13 @@ def _res_to_dict(record, fields=None):
 
     for field in fields:
         value = record[field]
-        for clazz in _classes:
-            if isinstance(value, clazz):
-                result[field] = _res_to_dict(value)
-            # elif isinstance(value, ResourceSet):
-            #     result[field] = value.values('hours', 'spent_on', 'comments', 'activity_id')
-            else:
-                result[field] = value
+        # for clazz in _classes:
+        #     if isinstance(value, clazz):
+        #         result[field] = _res_to_dict(value)
+        #     # elif isinstance(value, ResourceSet):
+        #     #     result[field] = value.values('hours', 'spent_on', 'comments', 'activity_id')
+        #     else:
+        #         result[field] = value
 
     return result
 
@@ -45,7 +45,7 @@ class CommonRender(object):
         self.status_tpl = u'%12s'
 
     def _decorate_priority(self, priority):
-        v = '%s' % priority
+        v = u'%s' % priority
         res = self.priority_tpl % priority
         if v == 'Immediate':
             return colored(res, 'red', attrs=['bold'])

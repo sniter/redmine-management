@@ -1,7 +1,8 @@
 __author__ = 'ilya'
 
 import argparse
-from redmine import Redmine
+# from redmine import Redmine
+from redmine import RedmineApi
 from actions import TaskList, TaskGet
 
 import yaml
@@ -13,6 +14,7 @@ import sys
 
 UTF8Writer = getwriter('utf8')
 sys.stdout = UTF8Writer(sys.stdout)
+
 
 pp = pprint.PrettyPrinter(indent=2)
 
@@ -37,12 +39,16 @@ parser.add_argument("--host",
 
 
 parser.add_argument("--login",
-                    action="store", dest="login", default=cfg['login'],
+                    action="store", dest="login", default=cfg.get('login', None),
                     help="Redmine Login")
 
 parser.add_argument("--password",
-                    action="store", dest="password", default=cfg['password'],
+                    action="store", dest="password", default=cfg.get('password', None),
                     help="Redmine Password")
+
+parser.add_argument("--token",
+                    action="store", dest="token", default=cfg.get('token', None),
+                    help="Redmine API Token")
 
 parser.add_argument('-p', '--project',
                     action="store", dest="project", default=cfg.get('project', None),
@@ -96,7 +102,13 @@ get_parser.add_argument("--comment",
 
 
 args = parser.parse_args()
-redmine = Redmine(unicode(args.host),  username=unicode(args.login), password=unicode(args.password))
-args.func(redmine, args)
+redmine_api = RedmineApi(
+    host=args.host,
+    token=args.token,
+    project_id=args.project
+
+)
+# redmine = Redmine(unicode(args.host),  username=unicode(args.login), password=unicode(args.password))
+args.func(redmine_api, args)
 
 # pp.pprint(args)
