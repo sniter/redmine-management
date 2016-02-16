@@ -25,7 +25,7 @@ class RedmineApi(object):
     def _json_call(self, url, **kwargs):
         url_params = kwargs.get('url_params', None)
         headers = kwargs.get('headers', {})
-        headers.update({'X-Redmine-API-Key': self._token})
+        headers.update({'X-Redmine-API-Key': self._token    })
 
         request = urllib2.Request(url + '?' +  urllib.urlencode(url_params))
 
