@@ -77,6 +77,8 @@ class CommonRender(object):
             return colored(res, 'yellow')
         if v == 'Feedback':
             return colored(res, 'red', attrs=['bold'])
+        if v == 'On Hold':
+            return colored(res, 'blue')
         if v == 'Closed':
             return colored(res, 'grey')
 
